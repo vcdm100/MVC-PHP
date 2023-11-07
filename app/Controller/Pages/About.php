@@ -5,27 +5,29 @@ namespace App\Controller\Pages;
 use \App\Utils\View;
 use \App\Model\Entity\Organization;
 
-class Home extends Page {
+class About extends Page {
 
     /**
-     * MÉTODO RESPONSÁVEL POR RETORNAR O "CONTEÚDO (VIEW - PASTA DE RESOURCES)" DA NOSSA HOME
+     * MÉTODO RESPONSÁVEL POR RETORNAR O "CONTEÚDO (VIEW - PASTA DE RESOURCES)" DA NOSSA PÁGINA DE SOBRE WDEV
      * @return string
      */
-    public static function getHome() {
+    public static function getAbout() {
         //ORGANIZAÇÃO 
         $ob0rganization = new Organization;
 
         # ==================================================
 
         //VIEW DA HOME
-        $content = View::render('pages/home', [
-            'name'          => $ob0rganization->name
+        $content = View::render('pages/about', [
+            'name'          => $ob0rganization->name,
+            'description'   => $ob0rganization->description,
+            'site'          => $ob0rganization->site
         ]);
 
         # ==================================================
         
         //RETORNA A VIEW DA PÁGINA
-        return parent :: getPage('HOME > WDEV', $content);
+        return parent :: getPage('SOBRE > WDEV', $content);
     }
     
 }
