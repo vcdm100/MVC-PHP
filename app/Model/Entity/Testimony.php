@@ -41,14 +41,22 @@ class Testimony{
     public function cadastrar(){
         //DEFINE A DATA
         $this->data = date('Y-m-d H:i:s');
+        /* echo "<pre>";
+        print_r($this);
+        echo "</pre>";
+        exit; */
         
         //INSERE O DEPOIMENTOS NO BANCO DE DADOS
         $this->id = (new Database('depoimentos'))->insert([
             'nome'=> $this->nome,
             'mensagem'=> $this->mensagem,
             'data' => $this->data,
-
         ]);
+        /* echo "<pre>";
+        print_r($this);
+        echo "</pre>";
+        exit; */
+
         //SUCESSO
         return true;
     }
