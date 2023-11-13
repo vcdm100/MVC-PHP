@@ -40,6 +40,9 @@ class Testimony{
      */
     public function cadastrar(){
         //DEFINE A DATA
+
+        date_default_timezone_set('America/Recife'); //Fuso horário
+
         $this->data = date('Y-m-d H:i:s');
         /* echo "<pre>";
         print_r($this);
