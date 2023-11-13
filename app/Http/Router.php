@@ -52,7 +52,7 @@ class Router {
         private function setPrefix() {
             //INFORMAÇÕES DA URL ATUAL
             $parseUrl = parse_url($this->url);
-            /* echo "<pre;>";
+            /* echo "<pre>";
             print_r($parseUrl);
             echo "</pre>";
             exit; */
@@ -74,15 +74,15 @@ class Router {
          */
         private function addRoute($method, $route, $params = []) {
             //TESTE
-            /* echo "<pre;>";
+            /* echo "<pre>";
             print_r($method);
             echo "</pre>";
 
-            echo "<pre;>";
+            echo "<pre>";
             print_r($route);
             echo "</pre>";
 
-            echo "<pre;>";
+            echo "<pre>";
             print_r($params);
             echo "</pre>";
             exit; */
@@ -97,7 +97,7 @@ class Router {
                     continue;
                 }
             }
-            /* echo "<pre;>";
+            /* echo "<pre>";
             print_r($params);
             echo "</pre>"; 
             exit; */
@@ -118,26 +118,26 @@ class Router {
 
                 $params['variables'] = $matches[1];
 
-                /* echo "<pre;>";
+                /* echo "<pre>";
                 print_r($matches);
-                echo "</pre>"; */
-                /* exit; */
+                echo "</pre>";
+                exit; */
             }
 
         // =====================================================================
 
             //PADRÃO DE VALIDAÇÃO DA URL
             $patternRoute = '/^'.str_replace('/', '\/', $route).'$/';
-            /* echo "<pre;>";
+            /* echo "<pre>";
             print_r($patternRoute);
-            echo "</pre>"; */
-            /* exit; */
+            echo "</pre>";
+            exit; */
 
             # ==================================================
 
             //ADICIONAR A ROTA DENTRO DA CLASSE
             $this->routes[$patternRoute][$method] = $params;
-            /* echo "<pre;>";
+            /* echo "<pre>";
             print_r($this);
             echo "</pre>";
             exit; */
@@ -203,16 +203,16 @@ class Router {
         private function getUri() {
             //URI DA REQUEST
             $uri = $this->request->getUri();
-            /* echo "<pre;>";
+            /* echo "<pre>";
             print_r($uri);
             echo "</pre>";
-            exit; */
-
+            exit;
+ */
             # ==================================================
 
             //FATIA A URI COM O PREFIXO
             $xUri = strlen($this->prefix) ? explode($this->prefix, $uri) : [$uri];
-            /* echo "<pre;>";
+            /* echo "<pre>";
             print_r($xUri);
             echo "</pre>";
             exit; */
@@ -233,7 +233,7 @@ class Router {
         private function getRoute() {
             //URI
             $uri = $this->getUri();
-            /* echo "<pre;>";
+            /* echo "<pre>";
             print_r($uri);
             echo "</pre>";
             exit; */
@@ -242,7 +242,7 @@ class Router {
 
             //METHOD
             $httpMethod = $this->request->getHttpMethod(); // SAÌDA: GET
-            /* echo "<pre;>";
+            /* echo "<pre>";
             print_r($httpMethod);
             echo "</pre>";
             exit; */
@@ -251,7 +251,7 @@ class Router {
 
             //VALIDA AS ROTAS
             foreach($this->routes as $patternRoute=>$methods) {
-                /* echo "<pre;>";
+                /* echo "<pre>";
                 print_r($patternRoute);
                 echo "</pre>";
                 exit; */
@@ -262,7 +262,7 @@ class Router {
                 if(preg_match($patternRoute, $uri, $matches)) {
                     //VERIFICA O MÉTODO
                     if(isset($methods[$httpMethod])) {
-                        /* echo "<pre;>";
+                        /* echo "<pre>";
                         print_r($matches);
                         echo "</pre>";
                         exit; */
@@ -271,7 +271,7 @@ class Router {
 
                         //REMOVE A PRIMEIRA POSIÇÃO
                         unset($matches[0]);
-                        /* echo "<pre;>";
+                        /* echo "<pre>";
                         print_r($matches);
                         echo "</pre>";
                         exit; */
@@ -282,12 +282,12 @@ class Router {
                         $keys = $methods[$httpMethod]['variables'];
                         $methods[$httpMethod]['variables'] = array_combine($keys, $matches);
                         $methods[$httpMethod]['variables']['request'] = $this->request;
-                        /* echo "<pre;>";
+                        /* echo "<pre>";
                         print_r($keys);
                         echo "</pre>";
                         exit; */
 
-                        /* echo "<pre;>";
+                        /* echo "<pre>";
                         print_r($methods);
                         echo "</pre>";
                         exit; */
@@ -323,10 +323,10 @@ class Router {
                 
                 //OBTÉM A ROTA ATUAL
                 $route = $this->getRoute();
-                /* echo "<pre;>";
+                /* echo "<pre>";
                 print_r($route);
                 echo "</pre>";
-                exit; */ // Exemplo: http://127.0.0.1:8080/pagina/10/consultar ($idPaginha e $acao)
+                exit;  */// Exemplo: http://127.0.0.1:8080/pagina/10/consultar ($idPaginha e $acao)
 
                 # ==================================================
 
@@ -345,14 +345,14 @@ class Router {
                 //REFLECTION
                 $reflection = new ReflectionFunction($route['controller']);
                 foreach($reflection->getParameters() as $parameter) {
-                    /* echo "<pre;>";
+                    /* echo "<pre>";
                     print_r($parameter);
                     echo "</pre>";
                     exit; */
 
                     $name = $parameter->getName();
                     $args[$name] = $route['variables'][$name] ?? '';
-                    /* echo "<pre;>";
+                    /* echo "<pre>";
                     print_r($args);
                     echo "</pre>";
                     exit; */
